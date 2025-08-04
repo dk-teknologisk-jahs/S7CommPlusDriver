@@ -28,8 +28,13 @@ namespace S7CommPlusGUIBrowser
             {
                 tbPassword.Text = args[2];
             }
-            // 3rd argument can be the plc socket port if different from ISOTCP port, otherwise use default (102)
+            // 3rd argument can be the plc username, otherwise use default (no username)
             if (args.Length >= 4)
+            {
+                tbUser.Text = args[3];
+            }
+            // 4rd argument can be the plc socket port if different from ISOTCP port, otherwise use default (102)
+            if (args.Length >= 5)
             {
                 nbPort.Value = Convert.ToInt32(args[3]);
             }
@@ -47,10 +52,10 @@ namespace S7CommPlusGUIBrowser
 
             if (conn != null) conn.Disconnect();
             conn = new S7CommPlusConnection();
-            int res = conn.Connect(tbIpAddress.Text, tbPassword.Text, 5000, Convert.ToInt32(nbPort.Value));
+            int res = conn.Connect(tbIpAddress.Text, tbPassword.Text, tbUser.Text, Convert.ToInt32(nbPort.Value));
             if (res != 0)
             {
-                setStatus("error");
+                setStatus("error: " + S7Client.ErrorText(res));
                 return;
             }
             setStatus("connected");
@@ -61,7 +66,7 @@ namespace S7CommPlusGUIBrowser
             res = conn.GetListOfDatablocks(out dbInfoList);
             if (res != 0)
             {
-                setStatus("error");
+                setStatus("error: " + S7Client.ErrorText(res));
                 return;
             }
             TreeNode tn;
@@ -265,7 +270,9 @@ namespace S7CommPlusGUIBrowser
                 case Softdatatype.S7COMMP_SOFTDATATYPE_AOMIDENT:
                 case Softdatatype.S7COMMP_SOFTDATATYPE_EVENTANY:
                 case Softdatatype.S7COMMP_SOFTDATATYPE_EVENTATT:
+                case Softdatatype.S7COMMP_SOFTDATATYPE_AOMAID:
                 case Softdatatype.S7COMMP_SOFTDATATYPE_AOMLINK:
+                case Softdatatype.S7COMMP_SOFTDATATYPE_EVENTHWINT:
                 case Softdatatype.S7COMMP_SOFTDATATYPE_HWANY:
                 case Softdatatype.S7COMMP_SOFTDATATYPE_HWIOSYSTEM:
                 case Softdatatype.S7COMMP_SOFTDATATYPE_HWDPMASTER:
@@ -357,9 +364,7 @@ namespace S7CommPlusGUIBrowser
 
             tbSymbolicAddress.Text = tag.Address.GetAccessString();
 
-            PlcTags tags = new PlcTags();
-            tags.AddTag(tag);
-            if (tags.ReadTags(conn) != 0) return;
+            if (conn.ReadTags(new[] { tag }) != 0) return;
             tbValue.Text = tag.ToString();
         }
 
