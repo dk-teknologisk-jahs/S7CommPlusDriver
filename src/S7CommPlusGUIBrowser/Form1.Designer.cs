@@ -26,16 +26,18 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nbPort = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.tbUser = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.lbStatus = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbIpAddress = new System.Windows.Forms.TextBox();
+            this.lbStatus = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageListTreeIcons = new System.Windows.Forms.ImageList(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -43,22 +45,20 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbSymbolicAddress = new System.Windows.Forms.TextBox();
+            this.labelAbsoluteAddress = new System.Windows.Forms.Label();
+            this.tbAbsoluteAddress = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbSymbol = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nbPort = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nbPort)).BeginInit();
             this.groupBox2.SuspendLayout();
-            //((System.ComponentModel.ISupportInitialize)(this.nbPort)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.nbPort);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.lbStatus);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.tbUser);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.btnDisconnect);
@@ -69,11 +69,34 @@
             this.groupBox1.Controls.Add(this.tbIpAddress);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(223, 142);
+            this.groupBox1.Size = new System.Drawing.Size(223, 177);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // nbPort
+            // 
+            this.nbPort.Location = new System.Drawing.Point(166, 33);
+            this.nbPort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.nbPort.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nbPort.Name = "nbPort";
+            this.nbPort.Size = new System.Drawing.Size(50, 20);
+            this.nbPort.TabIndex = 10;
+            this.nbPort.Value = new decimal(new int[] {
+            102,
+            0,
+            0,
+            0});
+            this.nbPort.ValueChanged += new System.EventHandler(this.nbPort_ValueChanged);
             // 
             // label8
             // 
@@ -100,24 +123,6 @@
             this.label7.Size = new System.Drawing.Size(102, 13);
             this.label7.TabIndex = 8;
             this.label7.Text = "Password (optional):";
-            // 
-            // lbStatus
-            // 
-            this.lbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbStatus.Location = new System.Drawing.Point(233, 158);
-            this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(555, 16);
-            this.lbStatus.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(195, 158);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Status:";
             // 
             // btnDisconnect
             // 
@@ -175,6 +180,24 @@
             this.tbIpAddress.TabIndex = 0;
             this.tbIpAddress.TextChanged += new System.EventHandler(this.tbIpAddress_TextChanged);
             // 
+            // lbStatus
+            // 
+            this.lbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbStatus.Location = new System.Drawing.Point(64, 192);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(555, 16);
+            this.lbStatus.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 192);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Status:";
+            // 
             // treeView1
             // 
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -182,10 +205,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageListTreeIcons;
-            this.treeView1.Location = new System.Drawing.Point(12, 183);
+            this.treeView1.Location = new System.Drawing.Point(12, 211);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(776, 255);
+            this.treeView1.Size = new System.Drawing.Size(776, 282);
             this.treeView1.TabIndex = 9;
             this.treeView1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterExpand);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -231,16 +254,6 @@
             this.imageListTreeIcons.Images.SetKeyName(34, "NamedSet");
             this.imageListTreeIcons.Images.SetKeyName(35, "TypeDefinition");
             // 
-            // nbPort
-            // 
-            this.nbPort.Location = new System.Drawing.Point(166, 33);
-            this.nbPort.Maximum = new decimal(new int[] {65535, 0, 0, 0});
-            this.nbPort.Minimum = new decimal(new int[] {1, 0, 0, 0});
-            this.nbPort.Name = "nbPort";
-            this.nbPort.Size = new System.Drawing.Size(50, 20);
-            this.nbPort.TabIndex = 10;
-            this.nbPort.Value = new decimal(new int[] { 102, 0, 0, 0});
-            this.nbPort.ValueChanged += new System.EventHandler(this.nbPort_ValueChanged);
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -249,12 +262,14 @@
             this.groupBox2.Controls.Add(this.tbValue);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.tbSymbolicAddress);
+            this.groupBox2.Controls.Add(this.labelAbsoluteAddress);
+            this.groupBox2.Controls.Add(this.tbAbsoluteAddress);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.tbSymbol);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(189, 12);
+            this.groupBox2.Location = new System.Drawing.Point(241, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(599, 139);
+            this.groupBox2.Size = new System.Drawing.Size(547, 177);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data";
@@ -262,7 +277,7 @@
             // btnRead
             // 
             this.btnRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRead.Location = new System.Drawing.Point(518, 30);
+            this.btnRead.Location = new System.Drawing.Point(466, 30);
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(75, 23);
             this.btnRead.TabIndex = 6;
@@ -274,16 +289,16 @@
             // 
             this.tbValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbValue.Location = new System.Drawing.Point(6, 110);
+            this.tbValue.Location = new System.Drawing.Point(6, 149);
             this.tbValue.Name = "tbValue";
             this.tbValue.ReadOnly = true;
-            this.tbValue.Size = new System.Drawing.Size(587, 20);
+            this.tbValue.Size = new System.Drawing.Size(535, 20);
             this.tbValue.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 94);
+            this.label5.Location = new System.Drawing.Point(6, 133);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 9;
@@ -296,8 +311,27 @@
             this.tbSymbolicAddress.Location = new System.Drawing.Point(6, 71);
             this.tbSymbolicAddress.Name = "tbSymbolicAddress";
             this.tbSymbolicAddress.ReadOnly = true;
-            this.tbSymbolicAddress.Size = new System.Drawing.Size(587, 20);
+            this.tbSymbolicAddress.Size = new System.Drawing.Size(535, 20);
             this.tbSymbolicAddress.TabIndex = 7;
+            // 
+            // labelAbsoluteAddress
+            // 
+            this.labelAbsoluteAddress.AutoSize = true;
+            this.labelAbsoluteAddress.Location = new System.Drawing.Point(6, 94);
+            this.labelAbsoluteAddress.Name = "labelAbsoluteAddress";
+            this.labelAbsoluteAddress.Size = new System.Drawing.Size(91, 13);
+            this.labelAbsoluteAddress.TabIndex = 10;
+            this.labelAbsoluteAddress.Text = "Absolute address:";
+            // 
+            // tbAbsoluteAddress
+            // 
+            this.tbAbsoluteAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAbsoluteAddress.Location = new System.Drawing.Point(6, 110);
+            this.tbAbsoluteAddress.Name = "tbAbsoluteAddress";
+            this.tbAbsoluteAddress.ReadOnly = true;
+            this.tbAbsoluteAddress.Size = new System.Drawing.Size(535, 20);
+            this.tbAbsoluteAddress.TabIndex = 11;
             // 
             // label4
             // 
@@ -314,7 +348,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSymbol.Location = new System.Drawing.Point(6, 32);
             this.tbSymbol.Name = "tbSymbol";
-            this.tbSymbol.Size = new System.Drawing.Size(506, 20);
+            this.tbSymbol.Size = new System.Drawing.Size(454, 20);
             this.tbSymbol.TabIndex = 5;
             // 
             // label3
@@ -330,7 +364,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 505);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.lbStatus);
@@ -339,11 +373,12 @@
             this.Name = "Form1";
             this.Text = "S7CommPlusGUIBrowser";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nbPort)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            //((System.ComponentModel.ISupportInitialize)(this.nbPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,7 +398,9 @@
         private System.Windows.Forms.TextBox tbValue;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbSymbolicAddress;
+        private System.Windows.Forms.TextBox tbAbsoluteAddress;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelAbsoluteAddress;
         private System.Windows.Forms.TextBox tbSymbol;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbStatus;

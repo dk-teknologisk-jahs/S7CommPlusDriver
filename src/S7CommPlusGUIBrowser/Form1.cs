@@ -356,13 +356,15 @@ namespace S7CommPlusGUIBrowser
         {
             tbValue.Text = "";
             tbSymbolicAddress.Text = "";
+            tbAbsoluteAddress.Text = "";
 
             setStatus("loading...");
             PlcTag tag = conn.getPlcTagBySymbol(tbSymbol.Text);
             setStatus("connected");
             if (tag == null) return;
 
-            tbSymbolicAddress.Text = tag.Address.GetAccessString();
+            tbSymbolicAddress.Text = tag.Address != null ? tag.Address.GetAccessString() : "";
+            tbAbsoluteAddress.Text = S7AddressFormatter.GetAbsoluteAddressString(tag);
 
             if (conn.ReadTags(new[] { tag }) != 0) return;
             tbValue.Text = tag.ToString();
@@ -444,6 +446,11 @@ namespace S7CommPlusGUIBrowser
         }
 
         private void nbPort_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
