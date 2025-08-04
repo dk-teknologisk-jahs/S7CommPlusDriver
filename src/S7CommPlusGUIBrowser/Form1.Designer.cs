@@ -44,12 +44,17 @@
             this.tbSymbol = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.imageListTreeIcons = new System.Windows.Forms.ImageList(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.nbPort = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            //((System.ComponentModel.ISupportInitialize)(this.nbPort)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.nbPort);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.lbStatus);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnDisconnect);
@@ -60,10 +65,21 @@
             this.groupBox1.Controls.Add(this.tbIpAddress);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(171, 142);
+            this.groupBox1.Size = new System.Drawing.Size(223, 142);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(163, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Port:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // lbStatus
             // 
@@ -117,6 +133,7 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(151, 20);
             this.tbPassword.TabIndex = 2;
+            this.tbPassword.TextChanged += new System.EventHandler(this.tbPassword_TextChanged);
             // 
             // label1
             // 
@@ -126,6 +143,7 @@
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "IP-Address:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tbIpAddress
             // 
@@ -133,6 +151,7 @@
             this.tbIpAddress.Name = "tbIpAddress";
             this.tbIpAddress.Size = new System.Drawing.Size(151, 20);
             this.tbIpAddress.TabIndex = 0;
+            this.tbIpAddress.TextChanged += new System.EventHandler(this.tbIpAddress_TextChanged);
             // 
             // treeView1
             // 
@@ -160,9 +179,9 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.tbSymbol);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(189, 12);
+            this.groupBox2.Location = new System.Drawing.Point(241, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(599, 142);
+            this.groupBox2.Size = new System.Drawing.Size(547, 142);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data";
@@ -170,7 +189,7 @@
             // btnRead
             // 
             this.btnRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRead.Location = new System.Drawing.Point(518, 30);
+            this.btnRead.Location = new System.Drawing.Point(466, 30);
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(75, 23);
             this.btnRead.TabIndex = 11;
@@ -185,7 +204,7 @@
             this.tbValue.Location = new System.Drawing.Point(6, 110);
             this.tbValue.Name = "tbValue";
             this.tbValue.ReadOnly = true;
-            this.tbValue.Size = new System.Drawing.Size(587, 20);
+            this.tbValue.Size = new System.Drawing.Size(535, 20);
             this.tbValue.TabIndex = 10;
             // 
             // label5
@@ -204,7 +223,7 @@
             this.tbSymbolicAddress.Location = new System.Drawing.Point(6, 71);
             this.tbSymbolicAddress.Name = "tbSymbolicAddress";
             this.tbSymbolicAddress.ReadOnly = true;
-            this.tbSymbolicAddress.Size = new System.Drawing.Size(587, 20);
+            this.tbSymbolicAddress.Size = new System.Drawing.Size(535, 20);
             this.tbSymbolicAddress.TabIndex = 8;
             // 
             // label4
@@ -222,7 +241,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSymbol.Location = new System.Drawing.Point(6, 32);
             this.tbSymbol.Name = "tbSymbol";
-            this.tbSymbol.Size = new System.Drawing.Size(506, 20);
+            this.tbSymbol.Size = new System.Drawing.Size(454, 20);
             this.tbSymbol.TabIndex = 6;
             // 
             // label3
@@ -275,6 +294,17 @@
             this.imageListTreeIcons.Images.SetKeyName(34, "NamedSet");
             this.imageListTreeIcons.Images.SetKeyName(35, "TypeDefinition");
             // 
+            // nbPort
+            // 
+            this.nbPort.Location = new System.Drawing.Point(166, 33);
+            this.nbPort.Maximum = new decimal(new int[] {65535, 0, 0, 0});
+            this.nbPort.Minimum = new decimal(new int[] {1, 0, 0, 0});
+            this.nbPort.Name = "nbPort";
+            this.nbPort.Size = new System.Drawing.Size(50, 20);
+            this.nbPort.TabIndex = 10;
+            this.nbPort.Value = new decimal(new int[] { 102, 0, 0, 0});
+            this.nbPort.ValueChanged += new System.EventHandler(this.nbPort_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,6 +320,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            //((System.ComponentModel.ISupportInitialize)(this.nbPort)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -315,6 +346,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.ImageList imageListTreeIcons;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nbPort;
     }
 }
 

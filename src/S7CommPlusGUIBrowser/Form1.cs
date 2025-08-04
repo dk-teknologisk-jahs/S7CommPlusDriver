@@ -28,6 +28,11 @@ namespace S7CommPlusGUIBrowser
             {
                 tbPassword.Text = args[2];
             }
+            // 3rd argument can be the plc socket port if different from ISOTCP port, otherwise use default (102)
+            if (args.Length >= 4)
+            {
+                nbPort.Value = Convert.ToInt32(args[3]);
+            }
         }
 
         private void setStatus(string status)
@@ -42,7 +47,7 @@ namespace S7CommPlusGUIBrowser
 
             if (conn != null) conn.Disconnect();
             conn = new S7CommPlusConnection();
-            int res = conn.Connect(tbIpAddress.Text, tbPassword.Text);
+            int res = conn.Connect(tbIpAddress.Text, tbPassword.Text, 5000, Convert.ToInt32(nbPort.Value));
             if (res != 0)
             {
                 setStatus("error");
@@ -401,6 +406,41 @@ namespace S7CommPlusGUIBrowser
             {
                 MessageBox.Show("ERROR: " + ex.Message);
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbIpAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbPort_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nbPort_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

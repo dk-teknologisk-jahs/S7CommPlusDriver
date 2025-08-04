@@ -389,8 +389,9 @@ namespace S7CommPlusDriver
         /// <param name="address">PLC IP address</param>
         /// <param name="password">PLC password (if set)</param>
         /// <param name="timeoutMs">read timeout in milliseconds (default: 5000 ms)</param>
+        /// <param name="port">PLC socket port if connection is proxied and socket port is separate from ISOTCP port (default: 102)</param>
         /// <returns></returns>
-        public int Connect(string address, string password = "", int timeoutMs = 5000)
+        public int Connect(string address, string password = "", int timeoutMs = 5000, int port = 102)
         {
             if (timeoutMs > 0) {
                 m_ReadTimeout = timeoutMs;
@@ -402,7 +403,7 @@ namespace S7CommPlusDriver
             m_client = new S7Client();
             m_client.OnDataReceived = this.OnDataReceived;
 
-            m_client.SetConnectionParams(address, 0x0600, Encoding.ASCII.GetBytes("SIMATIC-ROOT-HMI"));
+            m_client.SetConnectionParams(address, 0x0600, Encoding.ASCII.GetBytes("SIMATIC-ROOT-HMI"), port);
             res = m_client.Connect();
             if (res != 0)
                 return res;

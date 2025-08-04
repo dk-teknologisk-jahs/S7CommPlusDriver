@@ -214,6 +214,7 @@ namespace S7CommPlusDriver
 
 		// Privates
 		private string IPAddress;
+		private int SocketPort;
 		private byte LocalTSAP_HI;
 		private byte LocalTSAP_LO;
 		private byte[] RemoteTSAP_S;
@@ -241,7 +242,7 @@ namespace S7CommPlusDriver
 			if (_LastError == 0)
 				try
 				{
-					_LastError = Socket.Connect(IPAddress, _PLCPort);
+					_LastError = Socket.Connect(IPAddress, SocketPort);
 				}
 				catch
 				{
@@ -427,10 +428,11 @@ namespace S7CommPlusDriver
 			return _LastError;
 		}
 
-		public int SetConnectionParams(string Address, ushort LocalTSAP, byte[] RemoteTSAP)
+		public int SetConnectionParams(string Address, ushort LocalTSAP, byte[] RemoteTSAP, int Port = 102)
 		{
 			int LocTSAP = LocalTSAP & 0x0000FFFF;
 			IPAddress = Address;
+			SocketPort = Port;
 			LocalTSAP_HI = (byte)(LocTSAP >> 8);
 			LocalTSAP_LO = (byte)(LocTSAP & 0x00FF);
 
